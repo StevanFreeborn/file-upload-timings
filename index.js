@@ -11,7 +11,7 @@ const RECORD_PATH = `${process.env.CONTENT_RECORD_PATH}/Edit`;
 const SAVE_ATTACHMENTS_PATH = `${process.env.CONTENT_RECORD_PATH}/SaveAttachments`;
 
 await login();
-const timings = await attachFiles();
+const timings = await attachFiles(process.env.NUM_OF_TIMINGS);
 writeToCsv(timings);
 
 /**
