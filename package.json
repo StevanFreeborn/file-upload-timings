@@ -1,0 +1,16 @@
+{
+  "name": "file-upload-timings",
+  "version": "1.0.0",
+  "description": "Script to run repeated file uploads to Onspring and record time it takes for each upload.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stevan Freeborn",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "playwright": "^1.40.1"
+  }
+}
