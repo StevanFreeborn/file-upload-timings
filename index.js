@@ -93,22 +93,28 @@ async function attachFiles(numOfTimings = 1) {
 
   for (const file of files) {
     for (let i = 0; i < numOfTimings; i++) {
-      const fileChooserPromise = page.waitForEvent('filechooser');
-      const addFileResponse = page.waitForResponse(
-        /\/Content\/(\d+\/)?\d+\/SaveAttachments/
-      );
+      try {
+        const fileChooserPromise = page.waitForEvent('filechooser');
+        const addFileResponse = page.waitForResponse(
+          /\/Content\/(\d+\/)?\d+\/SaveAttachments/
+        );
 
-      await page.getByText('Add Attachment').click();
+        await page.getByText('Add Attachment').click();
 
-      const fileChooser = await fileChooserPromise;
-      await fileChooser.setFiles(path.join(TEST_FILES_PATH, file));
-      await addFileResponse;
+        const fileChooser = await fileChooserPromise;
+        await fileChooser.setFiles(path.join(TEST_FILES_PATH, file));
+        await addFileResponse;
 
-      const saveRecordResponse = page.waitForResponse(r => {
-        return r.url().includes(RECORD_PATH) && r.request().method() === 'POST';
-      });
-      await page.getByText('Save Record').click();
-      await saveRecordResponse;
+        const saveRecordResponse = page.waitForResponse(r => {
+          return (
+            r.url().includes(RECORD_PATH) && r.request().method() === 'POST'
+          );
+        });
+        await page.getByText('Save Record').click();
+        await saveRecordResponse;
+      } catch (error) {
+        console.error(`Error attaching ${file}: ${error.message}`);
+      }
     }
   }
 
