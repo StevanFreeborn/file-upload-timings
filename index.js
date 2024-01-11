@@ -98,7 +98,7 @@ async function attachFiles(numOfTimings = 1) {
         const addFileResponse = page.waitForResponse(
           /\/Content\/(\d+\/)?\d+\/SaveAttachments/,
           {
-            timeout: 60 * 1000,
+            timeout: 120 * 1000,
           }
         );
 
