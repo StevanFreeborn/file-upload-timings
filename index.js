@@ -96,7 +96,10 @@ async function attachFiles(numOfTimings = 1) {
       try {
         const fileChooserPromise = page.waitForEvent('filechooser');
         const addFileResponse = page.waitForResponse(
-          /\/Content\/(\d+\/)?\d+\/SaveAttachments/
+          /\/Content\/(\d+\/)?\d+\/SaveAttachments/,
+          {
+            timeout: 60 * 1000,
+          }
         );
 
         await page.getByText('Add Attachment').click();
